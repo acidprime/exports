@@ -47,7 +47,7 @@ Puppet::Face.define(:node, '0.0.1') do
       }
 
       min_widths = Hash[ *headers.map { |k,v| [k, v.length] }.flatten ]
-      min_widths['node_name'] = min_widths['exports'] = 80
+      min_widths['node_name'] = min_widths['exports'] = 40
 
       min_width = min_widths.inject(0) { |sum,pair| sum += pair.last } + (padding.length * (headers.length - 1))
 
