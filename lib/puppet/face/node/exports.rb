@@ -15,7 +15,7 @@ Puppet::Face.define(:node, '0.0.1') do
       This is a simple wrapper to connect to puppetdb for exported records
     EOT
     notes <<-'NOTES'
-      Currently it assumes your server is your puppetdb server
+      Directly connects to the puppetdb server using your local certificate
     NOTES
     examples <<-'EOT'
       List exported resources:
