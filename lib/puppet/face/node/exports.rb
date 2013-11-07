@@ -27,7 +27,6 @@ Puppet::Face.define(:node, '0.0.1') do
       output = [ {'Name' => 'Exports'} ]
       connection = Puppet::Network::HttpPool.http_instance(Puppet[:server],'8081')
       json_query = URI.escape(["=","exported",true].to_json)
-      Puppet.debug(connection.request_get("/v2/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
       unless filtered = PSON.load(connection.request_get("/v2/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
         raise "Error parsing json output of puppet search #{filtered}"
       end
