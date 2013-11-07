@@ -9,9 +9,6 @@ This is a puppet face that will display all exports in puppetdb from the command
 puppet node exports
 ```
 
-```shell
-puppet node exports
-```
 An example use would be monitoring students checking into the puppet master in the puppet advanced class
 
 ```shell

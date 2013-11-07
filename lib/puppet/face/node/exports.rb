@@ -9,16 +9,16 @@ Puppet::Face.define(:node, '0.0.1') do
   extend Puppet::Util::Colors
   action :exports do
     summary "Return the exports of nodes from puppetdb"
-    arguments "node"
+    arguments "<none>"
 
     description <<-'EOT'
-      stuff
+      This is a simple wrapper to connect to puppetdb for exported records
     EOT
     notes <<-'NOTES'
-      things
+      Currently it assumes your server is your puppetdb server
     NOTES
     examples <<-'EOT'
-      Compare host catalogs:
+      List exported resources:
 
       $ puppet node exports
     EOT
