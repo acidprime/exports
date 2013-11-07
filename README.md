@@ -12,7 +12,7 @@ puppet node exports
 ```shell
 puppet node exports
 ```
-An example use would be monitoring students checking into the puppet master in the fundamentals class
+An example use would be monitoring students checking into the puppet master in the puppet advanced class
 
 ```shell
 while :; do clear; puppet node exports; sleep 2; done
