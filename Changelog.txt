@@ -1,0 +1,3 @@
+0.0.3 - Zack Smith - Switch to pull puppetdb server
+0.0.2 - Zack Smith - Minor Docs
+0.0.1 - Zack Smith - Initial Commit
