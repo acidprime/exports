@@ -1,4 +1,4 @@
-# Simple yaml cache hack
+# Simple PuppetDB wrapper
 This is a puppet face that will display all exports in puppetdb from the command line
 
 # Usage
