@@ -4,6 +4,7 @@ This is a puppet face that will display all exports in puppetdb from the command
 # Usage
 1. Install the module into your modulepath
 2. Currently reads puppet.conf and uses `server` to connect to via http pool
+
 ```shell
 puppet node exports
 ```
