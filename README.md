@@ -24,7 +24,7 @@ watch  --color 'puppet node exports'
 
 ## Example output
 ```shell
-Name                                                                              Exports
-puppet3.puppetlabs.vm                                                             File[/tmp/production_puppet3.puppetlabs.vm_2]
-puppet3.puppetlabs.vm                                                             File[/tmp/production_puppet3.puppetlabs.vm]
+Name                                 Exports
+puppet3.puppetlabs.vm                File[/tmp/production_puppet3.puppetlabs.vm_2]
+puppet3.puppetlabs.vm                File[/tmp/production_puppet3.puppetlabs.vm]
 ```
