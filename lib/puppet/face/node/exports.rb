@@ -16,6 +16,12 @@ Puppet::Face.define(:node, '0.0.1') do
       default_to { false }
     end
 
+    option "--resources RESOURCE" do
+      summary "Filter the query to just a particular resource"
+      default_to { '' }
+    end
+
+
     description <<-'EOT'
       This is a simple wrapper to connect to puppetdb for exported records
     EOT
@@ -23,16 +29,25 @@ Puppet::Face.define(:node, '0.0.1') do
       Directly connects to the puppetdb server using your local certificate
     NOTES
     examples <<-'EOT'
-      List exported resources:
+      List all exported resources:
 
-      $ puppet node exports
+      $ puppet node export
+
+      List file exported resources:
+
+      $ puppet node exports file
     EOT
 
     when_invoked do |options|
       output = [ {'Name' => 'Exports'} ]
       connection = Puppet::Network::HttpPool.http_instance(Puppet::Util::Puppetdb.server,'8081')
-      json_query = URI.escape(["=","exported",true].to_json)
-      unless filtered = PSON.load(connection.request_get("/v2/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
+      query = ["and",["=","exported",true]]
+      if options[:resources]
+        types = options[:resources].split(',').map{|resource| ['=','type',resource.capitalize] }
+        query = query.concat(types)
+      end
+      json_query = URI.escape(query.to_json)
+      unless filtered = PSON.load(connection.request_get("/v3/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
         raise "Error parsing json output of puppet search #{filtered}"
       end
       output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
