@@ -1,3 +1,4 @@
+0.0.4 - Zack Smith - Turn off color, add --resources option
 0.0.3 - Zack Smith - Switch to pull puppetdb server
 0.0.2 - Zack Smith - Minor Docs
 0.0.1 - Zack Smith - Initial Commit
