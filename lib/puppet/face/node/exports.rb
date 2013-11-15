@@ -11,6 +11,11 @@ Puppet::Face.define(:node, '0.0.1') do
     summary "Return the exports of nodes from puppetdb"
     arguments "<none>"
 
+    option "--highlight" do
+      summary "Enable colorized output"
+      default_to { false }
+    end
+
     description <<-'EOT'
       This is a simple wrapper to connect to puppetdb for exported records
     EOT
@@ -30,12 +35,11 @@ Puppet::Face.define(:node, '0.0.1') do
       unless filtered = PSON.load(connection.request_get("/v2/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
         raise "Error parsing json output of puppet search #{filtered}"
       end
-      Puppet.debug("FILTERED: #{filtered}")
       output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
       output.flatten
     end
 
-    when_rendering :console do |output|
+    when_rendering :console do |output,options|
       if output.empty?
         Puppet.notice("No exported records found")
       end
@@ -73,10 +77,11 @@ Puppet::Face.define(:node, '0.0.1') do
         end.join(padding)
         results.map do |node_name,exports|
           n += 1
+          Puppet.debug("#{options.inspect}")
           if n.odd?
-            highlight[ :hwhite,format % [ node_name, exports ] ]
+            (options[:highlight] && highlight[ :hwhite,format % [ node_name, exports ] ] || format % [ node_name, exports ])
           else
-            highlight[ :white,format % [ node_name, exports ] ]
+            (options[:highlight] && highlight[ :white,format % [ node_name, exports ] ] || format % [ node_name, exports ])
           end
         end.join
       end
