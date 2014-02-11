@@ -43,7 +43,7 @@ Puppet::Face.define(:node, '0.0.1') do
       connection = Puppet::Network::HttpPool.http_instance(Puppet::Util::Puppetdb.server,'8081')
       query = ["and",["=","exported",true]]
       if options[:resources]
-        types = options[:resources].split(',').map{|resource| ['=','type',resource.capitalize] }
+        types = options[:resources].split(',').map{|resource| ['=','type',resource] }
         query = query.concat(types)
       end
       json_query = URI.escape(query.to_json)
