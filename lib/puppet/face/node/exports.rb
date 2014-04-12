@@ -40,7 +40,7 @@ Puppet::Face.define(:node, '0.0.1') do
 
     when_invoked do |options|
       output = [ {'Name' => 'Exports'} ]
-      connection = Puppet::Network::HttpPool.http_instance(Puppet::Util::Puppetdb.server,'8081')
+      connection = Puppet::Network::HttpPool.http_instance(Puppet::Util::Puppetdb.server,Puppet::Util::Puppetdb.port)
       query = ["and",["=","exported",true]]
       if options[:resources]
         types = options[:resources].split(',').map{|resource| ['=','type',resource] }
