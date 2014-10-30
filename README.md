@@ -33,7 +33,7 @@ puppet3.puppetlabs.vm                User[foooo]
 ```
 To query for just user resources
 ```shell
-puppet node exports user
+puppet node exports --resources user
 ```
 
 ```shell
