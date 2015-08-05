@@ -40,14 +40,28 @@ Puppet::Face.define(:node, '0.0.1') do
 
     when_invoked do |options|
       output = [ {'Name' => 'Exports'} ]
-      connection = Puppet::Network::HttpPool.http_instance(Puppet::Util::Puppetdb.server,Puppet::Util::Puppetdb.port)
+
+      # Logic to support PuppetDB API versions 3 and 4
+      # and the associated PuppetDB terminus interfaces
+      if Puppet::Util::Puppetdb.config.respond_to?("server_urls")
+        uri = URI(Puppet::Util::Puppetdb.config.server_urls.first)
+        server = uri.host
+        port = uri.port
+        endpoint = "/pdb/query/v4/resources"
+      else
+        server = Puppet::Util::Puppetdb.server
+        port = Puppet::Util::Puppetdb.port
+        endpoint = "/v3/resources"
+      end
+
+      connection = Puppet::Network::HttpPool.http_instance(server, port)
       query = ["and",["=","exported",true]]
       if options[:resources]
         types = options[:resources].split(',').map{|resource| ['=','type',resource] }
         query = query.concat(types)
       end
       json_query = URI.escape(query.to_json)
-      unless filtered = PSON.load(connection.request_get("/v3/resources/?query=#{json_query}", {"Accept" => 'application/json'}).body)
+      unless filtered = PSON.load(connection.request_get("#{endpoint}/?query=#{json_query}", {"Accept" => 'application/json'}).body)
         raise "Error parsing json output of puppet search #{filtered}"
       end
       output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
