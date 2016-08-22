@@ -1,5 +1,5 @@
 name 'zack-exports'
-version '0.0.5'
+version '0.0.6'
 source 'git://github.com/acidprime/exports.git'
 author 'Zack Smith'
 license 'Apache'

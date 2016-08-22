@@ -1,3 +1,4 @@
+0.0.5 - Troy Klein - Fixes for PuppetDB API updates
 0.0.4 - Jordan Olshevski - Fixes for PuppetDB API updates
 0.0.4 - Zack Smith - Turn off color, add --resources option
 0.0.3 - Zack Smith - Switch to pull puppetdb server
