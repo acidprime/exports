@@ -70,11 +70,11 @@ Puppet::Face.define(:node, '0.0.1') do
         raise "Error parsing json output of puppet search #{filtered}"
       end
       if options[:json]
-        puts 'filtered:'
-        puts filtered      
-        puts 'json output:' 
-        raw_output = filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
+        puts 'raw output:' 
+        raw_output = filtered.map { |node| Array[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
         puts raw_output 
+        puts 'json output:'         
+        puts raw_output.to_json        
       end
       output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
       output.flatten
