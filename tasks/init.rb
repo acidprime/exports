@@ -31,7 +31,13 @@ def exports(resources)
   }
 end
 
+results = {}
 params = JSON.parse(STDIN.read)
 resources = params['resources']
 
-exports(resources)
+output = exports(resources)
+if output[:exit_code].zero?
+  puts output[:stdout]
+else
+  puts 'There was a problem: '+output[:stderr]
+end
