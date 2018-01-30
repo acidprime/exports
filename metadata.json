@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "author": "Zack Smith",
     "summary": "Puppet face for querying puppetdb exports",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "source": "https://github.com/acidprime/exports",
     "project_page": "https://github.com/acidprime/exports",
     "issues_url": "https://github.com/acidprime/exports/issues",
