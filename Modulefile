@@ -1,8 +1,0 @@
-name 'zack-exports'
-version '0.0.6'
-source 'git://github.com/acidprime/exports.git'
-author 'Zack Smith'
-license 'Apache'
-summary 'Puppet face for querying puppetdb exports'
-description 'Query all nodes puppetdb exports'
-project_page 'http://github.com/acidprime/exports'
