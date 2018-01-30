@@ -71,7 +71,7 @@ Puppet::Face.define(:node, '0.0.1') do
       end
       if options[:json]
         puts 'raw output:' 
-        raw_output = filtered.map { |node| Array[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
+        raw_output = filtered.map { |node| Array['name' => node['certname'], 'exports' => ['type'=> "#{node['type'].capitalize}", 'title' => "#{node['title']}" ]]}
         puts raw_output 
         puts 'json output:'         
         puts raw_output.to_json        
