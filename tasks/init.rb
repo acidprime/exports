@@ -36,11 +36,12 @@ resources = params['resources']
 
 output = exports(resources)
 if output[:exit_code].zero?
-    if output[:stdout] == 'Name                                      Exports'
-      puts output[:stdout].length
+    # Assuming that if the results is just the table header the results are empty.
+    if output[:stdout].length == 49
       puts 'No Results Found.'
     else
       puts output[:stdout]
+      puts output[:stdout].to_json      
     end
 else
   puts 'There was a problem: '+output[:stderr]
