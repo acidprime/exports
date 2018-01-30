@@ -36,7 +36,8 @@ resources = params['resources']
 
 output = exports(resources)
 if output[:exit_code].zero?
-    if output == 'Name                                      Exports'
+    if output[:stdout] == 'Name                                      Exports'
+      puts output[:stdout].length
       puts 'No Results Found.'
     else
       puts output[:stdout]
