@@ -17,7 +17,7 @@ unless Puppet[:server] == Puppet[:certname]
 end
 
 def exports(resources)
-  command = "/opt/puppetlabs/puppet/bin/puppet node export"
+  command = "/opt/puppetlabs/puppet/bin/puppet node exports"
 
   unless resources.to_s.empty?
     command << " --resources \"#{resources}\""
