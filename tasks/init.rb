@@ -41,8 +41,7 @@ if output[:exit_code].zero?
       puts 'No Results Found.'
     else
       puts output[:stdout]
-      puts output[:stdout].to_json      
     end
 else
-  puts 'There was a problem: '+output[:stderr]
+  puts "There was a problem: #{output[:stderr]}"
 end
