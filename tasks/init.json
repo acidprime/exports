@@ -5,7 +5,7 @@
     "parameters": {
         "resources": {
             "description": "Filter the query to just a particular resource",
-            "type": "Optional[Pattern[/^([a-z0-9._-]+,?)+$/]]"
+            "type": "Optional[Pattern[/^([a-zA-Z0-9._-]+,?)+$/]]"
         }
     }
 }
