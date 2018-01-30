@@ -65,14 +65,18 @@ Puppet::Face.define(:node, '0.0.1') do
         query = query.concat(types)
       end
       json_query = URI.escape(query.to_json)
+      puts
       unless filtered = PSON.load(connection.request_get("#{endpoint}?query=#{json_query}", {"Accept" => 'application/json'}).body)
         raise "Error parsing json output of puppet search #{filtered}"
       end
-      output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
       if options[:json]
+        puts 'json_query:'
+        puts json_query  
         puts 'json output:' 
-        puts output 
+        raw_output = filtered.map { |node| Hash['node' => node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
+        puts raw_output 
       end
+      output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
       output.flatten
     end
 
