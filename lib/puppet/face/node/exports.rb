@@ -21,6 +21,10 @@ Puppet::Face.define(:node, '0.0.1') do
       default_to { '' }
     end
 
+    option "--json" do
+      summary "Enable json output"
+      default_to { false }
+    end    
 
     description <<-'EOT'
       This is a simple wrapper to connect to puppetdb for exported records
@@ -65,6 +69,10 @@ Puppet::Face.define(:node, '0.0.1') do
         raise "Error parsing json output of puppet search #{filtered}"
       end
       output << filtered.map { |node| Hash[node['certname'] => "#{node['type'].capitalize}[#{node['title']}]"]}
+      if options[:json]
+        puts 'json output:' 
+        puts output 
+      end
       output.flatten
     end
 
