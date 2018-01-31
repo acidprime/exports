@@ -12,18 +12,23 @@ require 'open3'
 Puppet.initialize_settings
 
 def exports(resources)
-  resources_flag = ''
-
-  unless resources.to_s.empty?
-    resources_flag = '--resources' 
+  if resources.to_s.empty?
+    stdout, stderr, status = Open3.capture3('/opt/puppetlabs/puppet/bin/puppet','node','exports')
+    {
+        stdout: stdout.strip,
+        stderr: stderr.strip,
+        exit_code: status.exitstatus,
+    }    
+  else    
+    stdout, stderr, status = Open3.capture3('/opt/puppetlabs/puppet/bin/puppet','node','exports', '--resources', resources)
+    {
+        stdout: stdout.strip,
+        stderr: stderr.strip,
+        exit_code: status.exitstatus,
+    }    
   end
 
-  stdout, stderr, status = Open3.capture3('/opt/puppetlabs/puppet/bin/puppet','node','exports', resources_flag, resources)
-  {
-    stdout: stdout.strip,
-    stderr: stderr.strip,
-    exit_code: status.exitstatus,
-  }    
+
 end
 
 params = JSON.parse(STDIN.read)
