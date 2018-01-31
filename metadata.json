@@ -1,6 +1,6 @@
 {
     "name": "acidprime-exports",
-    "version": "0.1.0",
+    "version": "0.6.0",
     "author": "Zack Smith",
     "summary": "Puppet face for querying puppetdb exports",
     "license": "Apache-2.0",

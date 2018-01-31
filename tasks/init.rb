@@ -1,34 +1,29 @@
 #!/opt/puppetlabs/puppet/bin/ruby
 #
-# Puppet Task to purge nodes
+# Puppet task for querying puppetdb exports
 # This can only be run against the Puppet Master.
 #
 # Parameters:
-#   * agent_certnames - A comma-separated list of agent certificate names.
+#   * resources - Filter the query to just a particular resource
 #
 require 'puppet'
 require 'open3'
 
 Puppet.initialize_settings
 
-unless Puppet[:server] == Puppet[:certname]
-  puts 'This task can only be run against the Master (of Masters)'
-  exit 1
-end
-
 def exports(resources)
-  command = "/opt/puppetlabs/puppet/bin/puppet node exports"
+  resources_flag = ''
 
   unless resources.to_s.empty?
-    command << " --resources \"#{resources}\""
+    resources_flag = '--resources' 
   end
 
-  stdout, stderr, status = Open3.capture3(command)
+  stdout, stderr, status = Open3.capture3('/opt/puppetlabs/puppet/bin/puppet','node','exports', resources_flag, resources)
   {
     stdout: stdout.strip,
     stderr: stderr.strip,
     exit_code: status.exitstatus,
-  }
+  }    
 end
 
 params = JSON.parse(STDIN.read)
