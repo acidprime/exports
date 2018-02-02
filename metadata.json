@@ -1,6 +1,6 @@
 {
     "name": "acidprimes-exports",
-    "version": "0.0.7",
+    "version": "1.0.0",
     "author": "Zack Smith",
     "summary": "Query all nodes puppetdb exports",
     "license": "Apache-2.0",
