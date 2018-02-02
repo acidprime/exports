@@ -1,0 +1,11 @@
+{
+    "puppet_task_version": 1,
+    "supports_noop": false,
+    "description": "Puppet task for querying puppetdb exports",
+    "parameters": {
+        "resources": {
+            "description": "Filter the query to just a particular resource",
+            "type": "Optional[Pattern[/^([a-zA-Z0-9._-]+,?)+$/]]"
+        }
+    }
+}
