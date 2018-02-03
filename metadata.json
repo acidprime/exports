@@ -1,6 +1,6 @@
 {
     "name": "zack-exports",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "Zack Smith",
     "summary": "Query all nodes puppetdb exports",
     "license": "Apache-2.0",
