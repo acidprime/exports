@@ -1,5 +1,5 @@
 {
-    "name": "acidprimes-exports",
+    "name": "zack-exports",
     "version": "1.0.0",
     "author": "Zack Smith",
     "summary": "Query all nodes puppetdb exports",
